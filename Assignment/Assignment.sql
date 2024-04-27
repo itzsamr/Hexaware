@@ -275,8 +275,31 @@ GROUP BY Courses.course_id, Courses.course_name;
 -- LEFT JOIN between the "Students" table and the "Enrollments" table to identify students 
 -- without enrollments.
 
+SELECT Students.first_name, 
+       Students.last_name
+FROM Students
+LEFT JOIN Enrollments ON Students.student_id = Enrollments.student_id
+WHERE Enrollments.student_id IS NULL;
 
+-- 4. Write an SQL query to retrieve the first name, last name of students, and the names of the 
+-- courses they are enrolled in. Use JOIN operations between the "Students" table and the 
+-- "Enrollments" and "Courses" tables.
 
+SELECT Students.first_name,
+		Students.last_name,
+		Courses.course_name
+FROM Students
+JOIN Courses ON Students.student_id = Courses.course_id
+JOIN Enrollments ON Enrollments.course_id = Courses.course_id;
+
+-- 5. Create a query to list the names of teachers and the courses they are assigned to. Join the 
+-- "Teacher" table with the "Courses" table.
+
+SELECT Teacher.first_name,
+		Teacher.last_name,
+		Courses.course_name
+FROM Teacher
+JOIN Courses ON Teacher.teacher_id = Courses.teacher_id;
 
 
 
