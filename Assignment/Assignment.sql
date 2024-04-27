@@ -202,7 +202,24 @@ SELECT * FROM Enrollments;
 
 -- 3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and 
 -- modify their email address.UPDATE TeacherSET email = 'professor.jones@gmail.com'WHERE teacher_id = 11;SELECT * FROM Teacher;-- 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
--- an enrollment record based on the student and course.
+-- an enrollment record based on the student and course.
+DELETE FROM Enrollments
+WHERE student_id = 12 AND course_id = 12;
+
+SELECT * FROM Enrollments;
+
+-- 5. Update the "Courses" table to assign a specific teacher to a course. Choose any course and 
+-- teacher from the respective tables.
+UPDATE Courses
+SET teacher_id = 4
+WHERE course_id = 4;
+
+SELECT * FROM Courses;
+
+-- 6. Delete a specific student from the "Students" table and remove all their enrollment records 
+-- from the "Enrollments" table. Be sure to maintain referential integrity
+
+
 
 
 
