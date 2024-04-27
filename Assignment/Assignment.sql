@@ -218,7 +218,24 @@ SELECT * FROM Courses;
 
 -- 6. Delete a specific student from the "Students" table and remove all their enrollment records 
 -- from the "Enrollments" table. Be sure to maintain referential integrity
-
+
+DELETE FROM Enrollments
+WHERE student_id = 21;
+
+DELETE FROM Students
+WHERE student_id = 21;
+
+SELECT * FROM Enrollments;
+SELECT * FROM Students;
+-- 7. Update the payment amount for a specific payment record in the "Payments" table. Choose any 
+-- payment record and modify the payment amount.
+
+UPDATE Payments
+SET amount = 25000.00
+WHERE student_id = 16;
+
+SELECT * FROM Payments;
+
 
 
 
