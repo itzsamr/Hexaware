@@ -1,3 +1,5 @@
+-- Task 1. Database Design:
+
 -- Create the database named "SISDB"
 CREATE DATABASE SISDB;
 
@@ -176,4 +178,31 @@ SELECT * FROM Courses;
 SELECT * FROM Teacher;
 SELECT * FROM Enrollments;
 SELECT * FROM Payments;
+
+-- Tasks 2: Select, Where, Between, AND, LIKE: 
+-- 1. Write an SQL query to insert a new student into the "Students" table with the following details:
+		-- a. First Name: John
+		-- b. Last Name: Doe
+		-- c. Date of Birth: 1995-08-15
+		-- d. Email: john.doe@example.com
+		-- e. Phone Number: 1234567890
+
+INSERT INTO Students (student_id, first_name, last_name, date_of_birth, email, phone_number)
+VALUES (21,'John', 'Doe', '1995-08-15', 'john.doe@example.com', '1234567890');
+
+SELECT * FROM Students;
+
+-- 2. Write an SQL query to enroll a student in a course. Choose an existing student and course and 
+-- insert a record into the "Enrollments" table with the enrollment date.
+
+INSERT INTO Enrollments(enrollment_id, student_id, course_id, enrollment_date)
+VALUES(21,21,20,'2023-06-01');
+
+SELECT * FROM Enrollments;
+
+-- 3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and 
+-- modify their email address.UPDATE TeacherSET email = 'professor.jones@gmail.com'WHERE teacher_id = 11;SELECT * FROM Teacher;-- 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
+-- an enrollment record based on the student and course.
+
+
 
