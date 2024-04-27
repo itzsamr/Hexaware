@@ -172,6 +172,9 @@ VALUES
     (19, 19, 2300.00, '2024-11-01'),
     (20, 20, 2400.00, '2024-11-15');
 
+INSERT INTO Payments (payment_id, student_id, amount, payment_date)
+VALUES 
+	(21,16,2340.00,'2024-07-02');
 
 SELECT * FROM Students;
 SELECT * FROM Courses;
@@ -201,15 +204,25 @@ VALUES(21,21,20,'2023-06-01');
 SELECT * FROM Enrollments;
 
 -- 3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and 
--- modify their email address.UPDATE TeacherSET email = 'professor.jones@gmail.com'WHERE teacher_id = 11;SELECT * FROM Teacher;-- 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
--- an enrollment record based on the student and course.
+-- modify their email address.
+
+UPDATE Teacher
+SET email = 'professor.jones@gmail.com'
+WHERE teacher_id = 11;
+
+SELECT * FROM Teacher;
+
+-- 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
+-- an enrollment record based on the student and course.
+
 DELETE FROM Enrollments
 WHERE student_id = 12 AND course_id = 12;
 
 SELECT * FROM Enrollments;
 
 -- 5. Update the "Courses" table to assign a specific teacher to a course. Choose any course and 
--- teacher from the respective tables.
+-- teacher from the respective tables.
+
 UPDATE Courses
 SET teacher_id = 4
 WHERE course_id = 4;
@@ -227,7 +240,8 @@ WHERE student_id = 21;
 
 SELECT * FROM Enrollments;
 SELECT * FROM Students;
--- 7. Update the payment amount for a specific payment record in the "Payments" table. Choose any 
+
+-- 7. Update the payment amount for a specific payment record in the "Payments" table. Choose any 
 -- payment record and modify the payment amount.
 
 UPDATE Payments
@@ -236,7 +250,41 @@ WHERE student_id = 16;
 
 SELECT * FROM Payments;
 
-
+-- Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:
+
+-- 1. Write an SQL query to calculate the total payments made by a specific student. You will need to 
+-- join the "Payments" table with the "Students" table based on the student's ID.
+
+SELECT SUM(amount) AS Total_Amount
+FROM Payments
+JOIN Students
+ON Payments.student_id = Students.student_id
+WHERE Students.student_id = 16;
+
+-- 2. Write an SQL query to retrieve a list of courses along with the count of students enrolled in each 
+-- course. Use a JOIN operation between the "Courses" table and the "Enrollments" table.
+
+SELECT Courses.course_id, 
+       Courses.course_name, 
+       COUNT(Enrollments.student_id) AS Enrollment_Count
+FROM Courses
+LEFT JOIN Enrollments ON Courses.course_id = Enrollments.course_id
+GROUP BY Courses.course_id, Courses.course_name;
+
+-- 3. Write an SQL query to find the names of students who have not enrolled in any course. Use a 
+-- LEFT JOIN between the "Students" table and the "Enrollments" table to identify students 
+-- without enrollments.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
