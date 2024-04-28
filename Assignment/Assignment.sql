@@ -301,6 +301,58 @@ SELECT Teacher.first_name,
 FROM Teacher
 JOIN Courses ON Teacher.teacher_id = Courses.teacher_id;
 
+-- 6. Retrieve a list of students and their enrollment dates for a specific course. You'll need to join the 
+-- "Students" table with the "Enrollments" and "Courses" tables.
+
+SELECT Students.first_name,
+       Students.last_name,
+       Enrollments.enrollment_date,
+       Courses.course_name
+FROM Students
+JOIN Enrollments ON Enrollments.student_id = Students.student_id
+JOIN Courses ON Courses.course_id = Enrollments.course_id;
+
+-- 7. Find the names of students who have not made any payments. Use a LEFT JOIN between the 
+-- "Students" table and the "Payments" table and filter for students with NULL payment records.
+
+SELECT Students.first_name,
+		Students.last_name
+FROM Students
+LEFT JOIN Payments ON Payments.student_id = Students.student_id
+WHERE Payments.payment_id IS NULL;
+
+-- 8. Write a query to identify courses that have no enrollments. You'll need to use a LEFT JOIN 
+-- between the "Courses" table and the "Enrollments" table and filter for courses with NULL 
+-- enrollment records.
+
+SELECT Courses.course_id,
+		Courses.course_name
+FROM Courses
+LEFT JOIN Enrollments ON Enrollments.course_id = Courses.course_id
+WHERE Enrollments.enrollment_id IS NULL;
+		
+
+-- 9. Identify students who are enrolled in more than one course. Use a self-join on the "Enrollments" 
+-- table to find students with multiple enrollment records.
+
+SELECT Students.first_name,
+       Students.last_name,
+	   COUNT(Enrollments.enrollment_id) AS no_of_enrollments
+FROM Students
+JOIN Enrollments ON Students.student_id = Enrollments.student_id
+GROUP BY Students.first_name, Students.last_name
+HAVING COUNT(Enrollments.course_id) > 1;
+
+
+-- 10. Find teachers who are not assigned to any courses. Use a LEFT JOIN between the "Teacher" 
+-- table and the "Courses" table and filter for teachers with NULL course assignments.
+
+SELECT Teacher.first_name,
+		Teacher.last_name
+FROM Teacher
+LEFT JOIN Courses ON Courses.teacher_id = Teacher.teacher_id
+WHERE Courses.teacher_id IS NULL;
+
 
 
 
