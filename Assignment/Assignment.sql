@@ -428,6 +428,14 @@ WHERE (
 
 -- 6. Retrieve the names of teachers who have not been assigned to any courses. Use subqueries to 
 -- find teachers with no course assignments.
+
+SELECT first_name, last_name
+FROM Teacher
+WHERE teacher_id NOT IN (
+    SELECT DISTINCT teacher_id
+    FROM Courses
+);
+
 -- 7. Calculate the average age of all students. Use subqueries to calculate the age of each student 
 -- based on their date of birth.
 -- 8. Identify courses with no enrollments. Use subqueries to find courses without enrollment 
