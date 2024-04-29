@@ -454,17 +454,58 @@ WHERE course_id NOT IN (
 
 -- 9. Calculate the total payments made by each student for each course they are enrolled in. Use 
 -- subqueries and aggregate functions to sum payments.
+
+SELECT Students.student_id,
+       Students.first_name,
+       Students.last_name,
+       Courses.course_id,
+       Courses.course_name,
+       COALESCE(SUM(Payments.amount), 0) AS total_payments
+FROM Students
+JOIN Enrollments ON Students.student_id = Enrollments.student_id
+JOIN Courses ON Enrollments.course_id = Courses.course_id
+LEFT JOIN Payments ON Enrollments.student_id = Payments.student_id
+GROUP BY Students.student_id, Students.first_name, Students.last_name, Courses.course_id, Courses.course_name;
+
 -- 10. Identify students who have made more than one payment. Use subqueries and aggregate 
 -- functions to count payments per student and filter for those with counts greater than one.
+
+SELECT Students.student_id, Students.first_name, Students.last_name
+FROM (
+    SELECT student_id, COUNT(*) AS payment_count
+    FROM Payments
+    GROUP BY student_id
+) AS payment_counts
+JOIN Students ON Students.student_id = payment_counts.student_id
+WHERE payment_counts.payment_count > 1;
+
 -- 11. Write an SQL query to calculate the total payments made by each student. Join the "Students" 
 -- table with the "Payments" table and use GROUP BY to calculate the sum of payments for each 
 -- student.
+
+SELECT Students.student_id,
+       Students.first_name,
+       Students.last_name,
+       COALESCE(SUM(Payments.amount), 0) AS total_payments
+FROM Students
+LEFT JOIN Payments ON Students.student_id = Payments.student_id
+GROUP BY Students.student_id, Students.first_name, Students.last_name;
+
 -- 12. Retrieve a list of course names along with the count of students enrolled in each course. Use 
 -- JOIN operations between the "Courses" table and the "Enrollments" table and GROUP BY to 
 -- count enrollments.
+
+SELECT Courses.course_name, COUNT(Enrollments.student_id) AS enrolled_students_count
+FROM Courses
+LEFT JOIN Enrollments ON Courses.course_id = Enrollments.course_id
+GROUP BY Courses.course_name;
+
 -- 13. Calculate the average payment amount made by students. Use JOIN operations between the 
 -- "Students" table and the "Payments" table and GROUP BY to calculate the average.
 
+SELECT AVG(Payments.amount) AS average_payment_amount
+FROM Payments
+JOIN Students ON Payments.student_id = Students.student_id;
 
 
 
