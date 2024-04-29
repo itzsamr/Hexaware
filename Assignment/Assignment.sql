@@ -438,8 +438,20 @@ WHERE teacher_id NOT IN (
 
 -- 7. Calculate the average age of all students. Use subqueries to calculate the age of each student 
 -- based on their date of birth.
+
+SELECT *, DATEDIFF(YEAR, date_of_birth, GETDATE()) AS avg_age
+FROM Students;
+
 -- 8. Identify courses with no enrollments. Use subqueries to find courses without enrollment 
 -- records.
+
+SELECT *
+FROM Courses
+WHERE course_id NOT IN (
+    SELECT DISTINCT course_id
+    FROM Enrollments
+);
+
 -- 9. Calculate the total payments made by each student for each course they are enrolled in. Use 
 -- subqueries and aggregate functions to sum payments.
 -- 10. Identify students who have made more than one payment. Use subqueries and aggregate 
