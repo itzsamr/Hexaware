@@ -2,15 +2,20 @@
 
 ## Task 1. Database Design: 
 
-### Create the database named "SISDB"
+### 1. Create the database named "SISDB"
 ```
 CREATE DATABASE SISDB;
 ```
-### Use the SISDB database
 ```
 USE SISDB;
 ```
-### Create the Students table
+### 2. Define the schema for the Students, Courses, Enrollments, Teacher, and Payments tables based on the provided schema. Write SQL scripts to create the mentioned tables with appropriate data types, constraints, and relationships. 
+a. Students 
+b. Courses
+c. Enrollments 
+d. Teacher 
+e. Payments
+### a. Create the Students table
 ```
 CREATE TABLE Students (
     student_id INT PRIMARY KEY,
@@ -21,7 +26,7 @@ CREATE TABLE Students (
     phone_number VARCHAR(20)
 );
 ```
-### Create the Courses table
+### b. Create the Courses table
 ```
 CREATE TABLE Courses (
     course_id INT PRIMARY KEY,
@@ -31,7 +36,7 @@ CREATE TABLE Courses (
     FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id)
 );
 ```
-### Create the Enrollments table
+### c. Create the Enrollments table
 ```
 CREATE TABLE Enrollments (
     enrollment_id INT PRIMARY KEY,
@@ -42,7 +47,7 @@ CREATE TABLE Enrollments (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );
 ```
-### Create the Teacher table
+### d. Create the Teacher table
 ```
 CREATE TABLE Teacher (
     teacher_id INT PRIMARY KEY,
@@ -51,7 +56,7 @@ CREATE TABLE Teacher (
     email VARCHAR(100)
 );
 ```
-### Create the Payments table
+### e. Create the Payments table
 ```
 CREATE TABLE Payments (
     payment_id INT PRIMARY KEY,
@@ -61,7 +66,62 @@ CREATE TABLE Payments (
     FOREIGN KEY (student_id) REFERENCES Students(student_id)
 );
 ```
-### Insert data into the Students table
+### 3. Create an ERD (Entity Relationship Diagram) for the database.
+![Entity Relationship Diagram](./Student%20Information%20System.jpeg)
+### 4. Create appropriate Primary Key and Foreign Key constraints for referential integrity.
+```
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    date_of_birth DATE,
+    email VARCHAR(100),
+    phone_number VARCHAR(20)
+);
+```
+```
+CREATE TABLE Courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100),
+    credits INT,
+    teacher_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id)
+);
+```
+```
+CREATE TABLE Enrollments (
+    enrollment_id INT PRIMARY KEY,
+    student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+```
+```
+CREATE TABLE Teacher (
+    teacher_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100)
+);
+```
+```
+CREATE TABLE Payments (
+    payment_id INT PRIMARY KEY,
+    student_id INT,
+    amount DECIMAL(10, 2),
+    payment_date DATE,
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+);
+```
+### 5. Insert at least 10 sample records into each of the following tables.
+i. Students
+ii. Courses
+iii. Enrollments
+iv. Teacher
+v. Payments
+### i. Insert data into the Students table
 ```
 INSERT INTO Students (student_id, first_name, last_name, date_of_birth, email, phone_number)
 VALUES
@@ -86,7 +146,7 @@ VALUES
     (19, 'Ethan', 'Sharma', '2001-07-07', 'ethan.sharma@example.com', '9876543210'),
     (20, 'Amelia', 'Lee', '2001-08-08', 'amelia.lee@example.com', '6789012345');
 ```
-### Insert data into the Courses table
+### ii. Insert data into the Courses table
 ```
 INSERT INTO Courses (course_id, course_name, credits, teacher_id)
 VALUES
@@ -111,7 +171,7 @@ VALUES
     (19, 'Engineering', 4, 19),
     (20, 'Business Management', 4, 20);
 ```
-### Insert data into the Enrollments table
+### iii. Insert data into the Enrollments table
 ```
 INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date)
 VALUES
@@ -136,7 +196,7 @@ VALUES
     (19, 19, 19, '2024-05-05'),
     (20, 20, 20, '2024-05-10');
 ```
-### Insert data into the Teacher table
+### iv. Insert data into the Teacher table
 ```
 INSERT INTO Teacher (teacher_id, first_name, last_name, email)
 VALUES
@@ -161,7 +221,7 @@ VALUES
     (19, 'Professor', 'Anderson', 'prof.anderson@example.com'),
     (20, 'Professor', 'Johnson', 'prof.johnson@example.com');
 ```
-### Insert data into the Payments table
+### v. Insert data into the Payments table
 ```
 INSERT INTO Payments (payment_id, student_id, amount, payment_date)
 VALUES
