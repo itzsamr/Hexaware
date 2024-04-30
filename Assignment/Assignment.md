@@ -1,6 +1,6 @@
 # Student Information System (SIS)
 
-## Task 1. Database Design
+## Task 1. Database Design: 
 
 ### Create the database named "SISDB"
 ```
@@ -199,56 +199,56 @@ SELECT * FROM Enrollments;
 SELECT * FROM Payments;
 ```
 
--- Tasks 2: Select, Where, Between, AND, LIKE: 
--- 1. Write an SQL query to insert a new student into the "Students" table with the following details:
-		-- a. First Name: John
-		-- b. Last Name: Doe
-		-- c. Date of Birth: 1995-08-15
-		-- d. Email: john.doe@example.com
-		-- e. Phone Number: 1234567890
-
+## Tasks 2: Select, Where, Between, AND, LIKE: 
+### 1. Write an SQL query to insert a new student into the "Students" table with the following details:
+	a. First Name: John
+	b. Last Name: Doe
+    c. Date of Birth: 1995-08-15
+	d. Email: john.doe@example.com
+	e. Phone Number: 1234567890 
+```
 INSERT INTO Students (student_id, first_name, last_name, date_of_birth, email, phone_number)
 VALUES (21,'John', 'Doe', '1995-08-15', 'john.doe@example.com', '1234567890');
-
+```
+```
 SELECT * FROM Students;
-
--- 2. Write an SQL query to enroll a student in a course. Choose an existing student and course and 
--- insert a record into the "Enrollments" table with the enrollment date.
-
+```
+### 2. Write an SQL query to enroll a student in a course. Choose an existing student and course and insert a record into the "Enrollments" table with the enrollment date.
+```
 INSERT INTO Enrollments(enrollment_id, student_id, course_id, enrollment_date)
 VALUES(21,21,20,'2023-06-01');
-
+```
+```
 SELECT * FROM Enrollments;
-
--- 3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and 
--- modify their email address.
-
+```
+### 3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and modify their email address.
+```
 UPDATE Teacher
 SET email = 'professor.jones@gmail.com'
 WHERE teacher_id = 11;
-
+```
+```
 SELECT * FROM Teacher;
-
--- 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
--- an enrollment record based on the student and course.
-
+```
+### 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select an enrollment record based on the student and course.
+```
 DELETE FROM Enrollments
 WHERE student_id = 12 AND course_id = 12;
-
+```
+```
 SELECT * FROM Enrollments;
-
--- 5. Update the "Courses" table to assign a specific teacher to a course. Choose any course and 
--- teacher from the respective tables.
-
+```
+### 5. Update the "Courses" table to assign a specific teacher to a course. Choose any course and teacher from the respective tables.
+```
 UPDATE Courses
 SET teacher_id = 4
 WHERE course_id = 4;
-
+```
+```
 SELECT * FROM Courses;
-
--- 6. Delete a specific student from the "Students" table and remove all their enrollment records 
--- from the "Enrollments" table. Be sure to maintain referential integrity
-
+```
+### 6. Delete a specific student from the "Students" table and remove all their enrollment records from the "Enrollments" table. Be sure to maintain referential integrity
+```
 DELETE FROM Enrollments
 WHERE student_id = 21;
 
@@ -257,16 +257,15 @@ WHERE student_id = 21;
 
 SELECT * FROM Enrollments;
 SELECT * FROM Students;
-
--- 7. Update the payment amount for a specific payment record in the "Payments" table. Choose any 
--- payment record and modify the payment amount.
-
+```
+### 7. Update the payment amount for a specific payment record in the "Payments" table. Choose any payment record and modify the payment amount.
+```
 UPDATE Payments
 SET amount = 25000.00
 WHERE student_id = 16;
 
 SELECT * FROM Payments;
-
+```
 -- Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:
 
 -- 1. Write an SQL query to calculate the total payments made by a specific student. You will need to 
