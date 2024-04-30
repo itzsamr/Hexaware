@@ -1,6 +1,6 @@
 # Student Information System (SIS)
 
-## Task 1. Database Design:
+## Task 1. Database Design
 
 ### Create the database named "SISDB"
 ```
