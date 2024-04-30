@@ -67,7 +67,7 @@ CREATE TABLE Payments (
 );
 ```
 ### 3. Create an ERD (Entity Relationship Diagram) for the database.
-![Entity Relationship Diagram](./Student%20Information%20System.jpeg)
+![Entity Relationship Diagram](./Student%20Information%20System.png)
 ### 4. Create appropriate Primary Key and Foreign Key constraints for referential integrity.
 ```
 CREATE TABLE Students (
