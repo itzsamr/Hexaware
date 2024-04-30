@@ -267,60 +267,52 @@ WHERE student_id = 16;
 ```
 SELECT * FROM Payments;
 ```
--- Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:
+## Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:
 
--- 1. Write an SQL query to calculate the total payments made by a specific student. You will need to 
--- join the "Payments" table with the "Students" table based on the student's ID.
-
+### 1. Write an SQL query to calculate the total payments made by a specific student. You will need to join the "Payments" table with the "Students" table based on the student's ID.
+```
 SELECT SUM(amount) AS Total_Amount
 FROM Payments
 JOIN Students
 ON Payments.student_id = Students.student_id
 WHERE Students.student_id = 16;
-
--- 2. Write an SQL query to retrieve a list of courses along with the count of students enrolled in each 
--- course. Use a JOIN operation between the "Courses" table and the "Enrollments" table.
-
+```
+### 2. Write an SQL query to retrieve a list of courses along with the count of students enrolled in each course. Use a JOIN operation between the "Courses" table and the "Enrollments" table.
+```
 SELECT Courses.course_id, 
        Courses.course_name, 
        COUNT(Enrollments.student_id) AS Enrollment_Count
 FROM Courses
 LEFT JOIN Enrollments ON Courses.course_id = Enrollments.course_id
 GROUP BY Courses.course_id, Courses.course_name;
-
--- 3. Write an SQL query to find the names of students who have not enrolled in any course. Use a 
--- LEFT JOIN between the "Students" table and the "Enrollments" table to identify students 
--- without enrollments.
-
+```
+### 3. Write an SQL query to find the names of students who have not enrolled in any course. Use a LEFT JOIN between the "Students" table and the "Enrollments" table to identify students without enrollments.
+```
 SELECT Students.first_name, 
        Students.last_name
 FROM Students
 LEFT JOIN Enrollments ON Students.student_id = Enrollments.student_id
 WHERE Enrollments.student_id IS NULL;
-
--- 4. Write an SQL query to retrieve the first name, last name of students, and the names of the 
--- courses they are enrolled in. Use JOIN operations between the "Students" table and the 
--- "Enrollments" and "Courses" tables.
-
+```
+### 4. Write an SQL query to retrieve the first name, last name of students, and the names of the courses they are enrolled in. Use JOIN operations between the "Students" table and the "Enrollments" and "Courses" tables.
+```
 SELECT Students.first_name,
 		Students.last_name,
 		Courses.course_name
 FROM Students
 JOIN Courses ON Students.student_id = Courses.course_id
 JOIN Enrollments ON Enrollments.course_id = Courses.course_id;
-
--- 5. Create a query to list the names of teachers and the courses they are assigned to. Join the 
--- "Teacher" table with the "Courses" table.
-
+```
+### 5. Create a query to list the names of teachers and the courses they are assigned to. Join the "Teacher" table with the "Courses" table.
+```
 SELECT Teacher.first_name,
 		Teacher.last_name,
 		Courses.course_name
 FROM Teacher
 JOIN Courses ON Teacher.teacher_id = Courses.teacher_id;
-
--- 6. Retrieve a list of students and their enrollment dates for a specific course. You'll need to join the 
--- "Students" table with the "Enrollments" and "Courses" tables.
-
+```
+### 6. Retrieve a list of students and their enrollment dates for a specific course. You'll need to join the "Students" table with the "Enrollments" and "Courses" tables.
+```
 SELECT Students.first_name,
        Students.last_name,
        Enrollments.enrollment_date,
@@ -328,30 +320,25 @@ SELECT Students.first_name,
 FROM Students
 JOIN Enrollments ON Enrollments.student_id = Students.student_id
 JOIN Courses ON Courses.course_id = Enrollments.course_id;
-
--- 7. Find the names of students who have not made any payments. Use a LEFT JOIN between the 
--- "Students" table and the "Payments" table and filter for students with NULL payment records.
-
+```
+### 7. Find the names of students who have not made any payments. Use a LEFT JOIN between the "Students" table and the "Payments" table and filter for students with NULL payment records.
+```
 SELECT Students.first_name,
 		Students.last_name
 FROM Students
 LEFT JOIN Payments ON Payments.student_id = Students.student_id
 WHERE Payments.payment_id IS NULL;
-
--- 8. Write a query to identify courses that have no enrollments. You'll need to use a LEFT JOIN 
--- between the "Courses" table and the "Enrollments" table and filter for courses with NULL 
--- enrollment records.
-
+```
+### 8. Write a query to identify courses that have no enrollments. You'll need to use a LEFT JOIN between the "Courses" table and the "Enrollments" table and filter for courses with NULL enrollment records.
+```
 SELECT Courses.course_id,
 		Courses.course_name
 FROM Courses
 LEFT JOIN Enrollments ON Enrollments.course_id = Courses.course_id
 WHERE Enrollments.enrollment_id IS NULL;
-		
-
--- 9. Identify students who are enrolled in more than one course. Use a self-join on the "Enrollments" 
--- table to find students with multiple enrollment records.
-
+```		
+### 9. Identify students who are enrolled in more than one course. Use a self-join on the "Enrollments" table to find students with multiple enrollment records.
+```
 SELECT Students.first_name,
        Students.last_name,
 	   COUNT(Enrollments.enrollment_id) AS no_of_enrollments
@@ -359,17 +346,15 @@ FROM Students
 JOIN Enrollments ON Students.student_id = Enrollments.student_id
 GROUP BY Students.first_name, Students.last_name
 HAVING COUNT(Enrollments.course_id) > 1;
-
-
--- 10. Find teachers who are not assigned to any courses. Use a LEFT JOIN between the "Teacher" 
--- table and the "Courses" table and filter for teachers with NULL course assignments.
-
+```
+### 10. Find teachers who are not assigned to any courses. Use a LEFT JOIN between the "Teacher" table and the "Courses" table and filter for teachers with NULL course assignments.
+```
 SELECT Teacher.first_name,
 		Teacher.last_name
 FROM Teacher
 LEFT JOIN Courses ON Courses.teacher_id = Teacher.teacher_id
 WHERE Courses.teacher_id IS NULL;
-
+```
 -- Task 4. Subquery and its type:
 
 -- 1. Write an SQL query to calculate the average number of students enrolled in each course. Use 
