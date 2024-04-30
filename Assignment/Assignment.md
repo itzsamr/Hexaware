@@ -61,8 +61,8 @@ CREATE TABLE Payments (
     FOREIGN KEY (student_id) REFERENCES Students(student_id)
 );
 ```
-
--- Insert data into the Students table
+### Insert data into the Students table
+```
 INSERT INTO Students (student_id, first_name, last_name, date_of_birth, email, phone_number)
 VALUES
     (1, 'Raj', 'Patel', '2000-01-01', 'raj.patel@example.com', '1234567890'),
@@ -85,8 +85,9 @@ VALUES
     (18, 'Aadvik', 'Brown', '2001-06-06', 'aadvik.brown@example.com', '5432109876'),
     (19, 'Ethan', 'Sharma', '2001-07-07', 'ethan.sharma@example.com', '9876543210'),
     (20, 'Amelia', 'Lee', '2001-08-08', 'amelia.lee@example.com', '6789012345');
-
--- Insert data into the Courses table
+```
+### Insert data into the Courses table
+```
 INSERT INTO Courses (course_id, course_name, credits, teacher_id)
 VALUES
     (1, 'Mathematics', 3, 1),
@@ -109,8 +110,9 @@ VALUES
     (18, 'Data Science', 4, 18),
     (19, 'Engineering', 4, 19),
     (20, 'Business Management', 4, 20);
-
--- Insert data into the Enrollments table
+```
+### Insert data into the Enrollments table
+```
 INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date)
 VALUES
     (1, 1, 1, '2024-01-01'),
@@ -133,8 +135,9 @@ VALUES
     (18, 18, 18, '2024-05-01'),
     (19, 19, 19, '2024-05-05'),
     (20, 20, 20, '2024-05-10');
-
--- Insert data into the Teacher table
+```
+### Insert data into the Teacher table
+```
 INSERT INTO Teacher (teacher_id, first_name, last_name, email)
 VALUES
     (1, 'Professor', 'Patel', 'prof.patel@example.com'),
@@ -157,8 +160,9 @@ VALUES
     (18, 'Professor', 'Sharma', 'prof.sharma@example.com'),
     (19, 'Professor', 'Anderson', 'prof.anderson@example.com'),
     (20, 'Professor', 'Johnson', 'prof.johnson@example.com');
-
--- Insert data into the Payments table
+```
+### Insert data into the Payments table
+```
 INSERT INTO Payments (payment_id, student_id, amount, payment_date)
 VALUES
     (1, 1, 500.00, '2024-02-01'),
@@ -181,16 +185,19 @@ VALUES
     (18, 18, 2200.00, '2024-10-15'),
     (19, 19, 2300.00, '2024-11-01'),
     (20, 20, 2400.00, '2024-11-15');
-
+```
+```
 INSERT INTO Payments (payment_id, student_id, amount, payment_date)
 VALUES 
 	(21,16,2340.00,'2024-07-02');
-
+```
+```
 SELECT * FROM Students;
 SELECT * FROM Courses;
 SELECT * FROM Teacher;
 SELECT * FROM Enrollments;
 SELECT * FROM Payments;
+```
 
 -- Tasks 2: Select, Where, Between, AND, LIKE: 
 -- 1. Write an SQL query to insert a new student into the "Students" table with the following details:
