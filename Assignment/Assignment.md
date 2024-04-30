@@ -251,10 +251,10 @@ SELECT * FROM Courses;
 ```
 DELETE FROM Enrollments
 WHERE student_id = 21;
-
 DELETE FROM Students
 WHERE student_id = 21;
-
+```
+```
 SELECT * FROM Enrollments;
 SELECT * FROM Students;
 ```
@@ -263,7 +263,8 @@ SELECT * FROM Students;
 UPDATE Payments
 SET amount = 25000.00
 WHERE student_id = 16;
-
+```
+```
 SELECT * FROM Payments;
 ```
 -- Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:
