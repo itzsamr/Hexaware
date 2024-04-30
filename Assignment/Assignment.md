@@ -2,8 +2,10 @@
 
 ## Task 1. Database Design:
 
--- Create the database named "SISDB"
+### Create the database named "SISDB"
+```
 CREATE DATABASE SISDB;
+```
 
 -- Use the SISDB database
 USE SISDB;
