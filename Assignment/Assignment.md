@@ -6,11 +6,12 @@
 ```
 CREATE DATABASE SISDB;
 ```
-
--- Use the SISDB database
+### Use the SISDB database
+```
 USE SISDB;
-
--- Create the Students table
+```
+### Create the Students table
+```
 CREATE TABLE Students (
     student_id INT PRIMARY KEY,
     first_name VARCHAR(50),
@@ -19,8 +20,9 @@ CREATE TABLE Students (
     email VARCHAR(100),
     phone_number VARCHAR(20)
 );
-
--- Create the Courses table
+```
+### Create the Courses table
+```
 CREATE TABLE Courses (
     course_id INT PRIMARY KEY,
     course_name VARCHAR(100),
@@ -28,8 +30,9 @@ CREATE TABLE Courses (
     teacher_id INT,
     FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id)
 );
-
--- Create the Enrollments table
+```
+### Create the Enrollments table
+```
 CREATE TABLE Enrollments (
     enrollment_id INT PRIMARY KEY,
     student_id INT,
@@ -38,16 +41,18 @@ CREATE TABLE Enrollments (
     FOREIGN KEY (student_id) REFERENCES Students(student_id),
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );
-
--- Create the Teacher table
+```
+### Create the Teacher table
+```
 CREATE TABLE Teacher (
     teacher_id INT PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     email VARCHAR(100)
 );
-
--- Create the Payments table
+```
+### Create the Payments table
+```
 CREATE TABLE Payments (
     payment_id INT PRIMARY KEY,
     student_id INT,
@@ -55,6 +60,7 @@ CREATE TABLE Payments (
     payment_date DATE,
     FOREIGN KEY (student_id) REFERENCES Students(student_id)
 );
+```
 
 -- Insert data into the Students table
 INSERT INTO Students (student_id, first_name, last_name, date_of_birth, email, phone_number)
