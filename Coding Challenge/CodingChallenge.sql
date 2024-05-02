@@ -264,3 +264,15 @@ FROM Companies C
 LEFT JOIN Jobs J ON C.CompanyID = J.CompanyID
 GROUP BY C.CompanyName;
 
+-- 15. List all applicants along with the companies and positions they have applied for, including those who have not applied.
+SELECT A.FirstName, A.LastName, COALESCE(C.CompanyName, 'Not Applied') AS CompanyName, COALESCE(J.JobTitle, 'Not Applied') AS JobTitle
+FROM Applicants A
+LEFT JOIN Applications AP ON A.ApplicantID = AP.ApplicantID
+LEFT JOIN Jobs J ON AP.JobID = J.JobID
+LEFT JOIN Companies C ON J.CompanyID = C.CompanyID;
+
+-- 16. Find companies that have posted jobs with a salary higher than the average salary of all jobs.
+SELECT DISTINCT C.CompanyName
+FROM Companies C
+JOIN Jobs J ON C.CompanyID = J.CompanyID
+WHERE J.Salary > (SELECT AVG(Salary) FROM Jobs WHERE Salary > 0);
