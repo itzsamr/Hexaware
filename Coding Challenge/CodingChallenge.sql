@@ -218,3 +218,14 @@ FROM Companies C
 LEFT JOIN Jobs J ON C.CompanyID = J.CompanyID
 GROUP BY C.CompanyName
 ORDER BY COUNT(J.JobID) DESC;
+
+-- 10. Find the applicants who have applied for positions in companies located in 'CityX' and have at least 3 years of experience.
+DECLARE @City VARCHAR(100) = 'CityX';
+
+SELECT DISTINCT A.*
+FROM Applicants A
+JOIN Applications AP ON A.ApplicantID = AP.ApplicantID
+JOIN Jobs J ON AP.JobID = J.JobID
+JOIN Companies C ON J.CompanyID = C.CompanyID
+WHERE C.Location = @City 
+AND DATEDIFF(YEAR, CONVERT(DATE, SUBSTRING(A.Resume, CHARINDEX('years', A.Resume) - 3, 2) + '-' + SUBSTRING(A.Resume, CHARINDEX('years', A.Resume) - 6, 2) + '-' + SUBSTRING(A.Resume, CHARINDEX('years', A.Resume) - 9, 4)), GETDATE()) >= 3;
