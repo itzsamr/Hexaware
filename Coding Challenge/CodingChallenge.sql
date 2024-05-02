@@ -1,4 +1,14 @@
--- Coding Challenges: CareerHub, The Job Board-- Create SQL Schema from the application, use the class attributes for table column names.-- Create Database CareerHubDBCREATE DATABASE CareerHub;-- Use the Database CareerHubDBUSE CareerHub;-- Create Companies table
+-- Coding Challenges: CareerHub, The Job Board
+
+-- Create SQL Schema from the application, use the class attributes for table column names.
+
+-- Create Database CareerHubDB
+CREATE DATABASE CareerHub;
+
+-- Use the Database CareerHubDB
+USE CareerHub;
+
+-- Create Companies table
 CREATE TABLE Companies (
     CompanyID INT PRIMARY KEY,
     CompanyName VARCHAR(255),
@@ -85,7 +95,7 @@ SELECT * FROM Applications;
 SELECT * FROM Jobs;
 
 -- Tasks:
--- 1. Provide a SQL script that initializes the database for the Job Board scenario “CareerHub”. 
+-- 1. Provide a SQL script that initializes the database for the Job Board scenario ï¿½CareerHubï¿½. 
 CREATE DATABASE CareerHub;
 USE CareerHub;
 
@@ -234,3 +244,29 @@ AND DATEDIFF(YEAR, CONVERT(DATE, SUBSTRING(A.Resume, CHARINDEX('years', A.Resume
 SELECT DISTINCT JobTitle
 FROM Jobs
 WHERE Salary BETWEEN 60000 AND 80000;
+
+-- 12. Find the jobs that have not received any applications.
+SELECT J.*
+FROM Jobs J
+LEFT JOIN Applications A ON J.JobID = A.JobID
+WHERE A.JobID IS NULL;
+
+-- 13. Retrieve a list of job applicants along with the companies they have applied to and the positions they have applied for.
+SELECT A.FirstName, A.LastName, C.CompanyName, J.JobTitle
+FROM Applicants A
+JOIN Applications AP ON A.ApplicantID = AP.ApplicantID
+JOIN Jobs J ON AP.JobID = J.JobID
+JOIN Companies C ON J.CompanyID = C.CompanyID;
+
+-- 14. Retrieve a list of companies along with the count of jobs they have posted, even if they have not received any applications.
+SELECT C.CompanyName, COUNT(J.JobID) AS JobCount
+FROM Companies C
+LEFT JOIN Jobs J ON C.CompanyID = J.CompanyID
+GROUP BY C.CompanyName;
+
+-- 15. List all applicants along with the companies and positions they have applied for, including those who have not applied.
+SELECT A.FirstName, A.LastName, COALESCE(C.CompanyName, 'Not Applied') AS CompanyName, COALESCE(J.JobTitle, 'Not Applied') AS JobTitle
+FROM Applicants A
+LEFT JOIN Applications AP ON A.ApplicantID = AP.ApplicantID
+LEFT JOIN Jobs J ON AP.JobID = J.JobID
+LEFT JOIN Companies C ON J.CompanyID = C.CompanyID;
