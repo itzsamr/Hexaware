@@ -229,3 +229,8 @@ JOIN Jobs J ON AP.JobID = J.JobID
 JOIN Companies C ON J.CompanyID = C.CompanyID
 WHERE C.Location = @City 
 AND DATEDIFF(YEAR, CONVERT(DATE, SUBSTRING(A.Resume, CHARINDEX('years', A.Resume) - 3, 2) + '-' + SUBSTRING(A.Resume, CHARINDEX('years', A.Resume) - 6, 2) + '-' + SUBSTRING(A.Resume, CHARINDEX('years', A.Resume) - 9, 4)), GETDATE()) >= 3;
+
+-- 11. Retrieve a list of distinct job titles with salaries between $60,000 and $80,000.
+SELECT DISTINCT JobTitle
+FROM Jobs
+WHERE Salary BETWEEN 60000 AND 80000;
