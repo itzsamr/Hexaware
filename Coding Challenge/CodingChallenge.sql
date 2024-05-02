@@ -280,3 +280,23 @@ WHERE J.Salary > (SELECT AVG(Salary) FROM Jobs WHERE Salary > 0);
 -- 17. Display a list of applicants with their names and a concatenated string of their city and state.
 SELECT FirstName, LastName, CONCAT(City, ', ', State) AS Location
 FROM Applicants;
+
+-- 18. Retrieve a list of jobs with titles containing either 'Developer' or 'Engineer'.
+SELECT *
+FROM Jobs
+WHERE JobTitle LIKE '%Developer%' OR JobTitle LIKE '%Engineer%';
+
+-- 19. Retrieve a list of applicants and the jobs they have applied for, including those who have not applied and jobs without applicants.
+SELECT A.FirstName, A.LastName, J.JobTitle
+FROM Applicants A
+FULL OUTER JOIN Applications AP ON A.ApplicantID = AP.ApplicantID
+FULL OUTER JOIN Jobs J ON AP.JobID = J.JobID;
+
+-- 20. List all combinations of applicants and companies where the company is in a specific city and the applicant has more than 2 years of experience. For example: city=Chennai
+DECLARE @City VARCHAR(100) = 'Chennai';
+
+SELECT DISTINCT A.FirstName, A.LastName, C.CompanyName
+FROM Applicants A
+CROSS JOIN Companies C
+WHERE A.City = @City 
+AND DATEDIFF(YEAR, CONVERT(DATE, SUBSTRING(A.Resume, CHARINDEX('experience', A.Resume) - 5, 4) + '-' + SUBSTRING(A.Resume, CHARINDEX('experience', A.Resume) - 2, 2) + '-01'), GETDATE()) > 2;
