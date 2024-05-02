@@ -276,3 +276,7 @@ SELECT DISTINCT C.CompanyName
 FROM Companies C
 JOIN Jobs J ON C.CompanyID = J.CompanyID
 WHERE J.Salary > (SELECT AVG(Salary) FROM Jobs WHERE Salary > 0);
+
+-- 17. Display a list of applicants with their names and a concatenated string of their city and state.
+SELECT FirstName, LastName, CONCAT(City, ', ', State) AS Location
+FROM Applicants;
