@@ -84,3 +84,137 @@ SELECT * FROM Applicants;
 SELECT * FROM Applications;
 SELECT * FROM Jobs;
 
+-- Tasks:
+-- 1. Provide a SQL script that initializes the database for the Job Board scenario “CareerHub”. 
+CREATE DATABASE CareerHub;
+USE CareerHub;
+
+-- 2. Create tables for Companies, Jobs, Applicants and Applications. 
+-- Create Companies table
+CREATE TABLE Companies (
+    CompanyID INT PRIMARY KEY,
+    CompanyName VARCHAR(255),
+    Location VARCHAR(255)
+);
+
+-- Create Jobs table
+CREATE TABLE Jobs (
+    JobID INT PRIMARY KEY,
+    CompanyID INT,
+    JobTitle VARCHAR(255),
+    JobDescription TEXT,
+    JobLocation VARCHAR(255),
+    Salary DECIMAL(18, 2),
+    JobType VARCHAR(50),
+    PostedDate DATETIME,
+    FOREIGN KEY (CompanyID) REFERENCES Companies(CompanyID)
+);
+
+-- Create Applicants table
+CREATE TABLE Applicants (
+    ApplicantID INT PRIMARY KEY,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(255),
+    Phone VARCHAR(20),
+    City VARCHAR(100),  
+    State VARCHAR(100), 
+    Resume VARCHAR(100)
+);
+
+-- Create Applications table
+CREATE TABLE Applications (
+    ApplicationID INT PRIMARY KEY,
+    JobID INT,
+    ApplicantID INT,
+    ApplicationDate DATETIME,
+    CoverLetter TEXT,
+    FOREIGN KEY (JobID) REFERENCES Jobs(JobID),
+    FOREIGN KEY (ApplicantID) REFERENCES Applicants(ApplicantID)
+);
+
+-- 3. Define appropriate primary keys, foreign keys, and constraints. 
+-- Create Companies table
+CREATE TABLE Companies (
+    CompanyID INT PRIMARY KEY,
+    CompanyName VARCHAR(255),
+    Location VARCHAR(255)
+);
+
+-- Create Jobs table
+CREATE TABLE Jobs (
+    JobID INT PRIMARY KEY,
+    CompanyID INT,
+    JobTitle VARCHAR(255),
+    JobDescription TEXT,
+    JobLocation VARCHAR(255),
+    Salary DECIMAL(18, 2),
+    JobType VARCHAR(50),
+    PostedDate DATETIME,
+    FOREIGN KEY (CompanyID) REFERENCES Companies(CompanyID)
+);
+
+-- Create Applicants table
+CREATE TABLE Applicants (
+    ApplicantID INT PRIMARY KEY,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(255),
+    Phone VARCHAR(20),
+    City VARCHAR(100),  
+    State VARCHAR(100), 
+    Resume VARCHAR(100)
+);
+
+-- Create Applications table
+CREATE TABLE Applications (
+    ApplicationID INT PRIMARY KEY,
+    JobID INT,
+    ApplicantID INT,
+    ApplicationDate DATETIME,
+    CoverLetter TEXT,
+    FOREIGN KEY (JobID) REFERENCES Jobs(JobID),
+    FOREIGN KEY (ApplicantID) REFERENCES Applicants(ApplicantID)
+);
+
+-- 4. Ensure the script handles potential errors, such as if the database or tables already exist.
+SELECT * FROM Companies;
+SELECT * FROM Applicants;
+SELECT * FROM Applications;
+SELECT * FROM Jobs;
+
+-- 5. Write an SQL query to count the number of applications received for each job listing in the "Jobs" table. Display the job title and the corresponding application count. Ensure that it lists all jobs, even if they have no applications.
+SELECT J.JobTitle, COUNT(A.JobID) AS ApplicationCount
+FROM Jobs J
+LEFT JOIN Applications A ON J.JobID = A.JobID
+GROUP BY J.JobTitle;
+
+-- 6. Develop an SQL query that retrieves job listings from the "Jobs" table within a specified salary range. Allow parameters for the minimum and maximum salary values. Display the job title, company name, location, and salary for each matching job.
+DECLARE @MinSalary DECIMAL(18, 2) = 60000;
+DECLARE @MaxSalary DECIMAL(18, 2) = 80000;
+
+SELECT J.JobTitle, C.CompanyName, J.JobLocation, J.Salary
+FROM Jobs J
+JOIN Companies C ON J.CompanyID = C.CompanyID
+WHERE J.Salary BETWEEN @MinSalary AND @MaxSalary;
+
+-- 7. Write an SQL query that retrieves the job application history for a specific applicant. Allow a parameter for the ApplicantID, and return a result set with the job titles, company names, and application dates for all the jobs the applicant has applied to.
+DECLARE @ApplicantID INT = 101;
+
+SELECT J.JobTitle, C.CompanyName, A.ApplicationDate
+FROM Applications A
+JOIN Jobs J ON A.JobID = J.JobID
+JOIN Companies C ON J.CompanyID = C.CompanyID
+WHERE A.ApplicantID = @ApplicantID;
+
+-- 8. Create an SQL query that calculates and displays the average salary offered by all companies for job listings in the "Jobs" table. Ensure that the query filters out jobs with a salary of zero.
+SELECT AVG(Salary) AS AverageSalary
+FROM Jobs
+WHERE Salary > 0;
+
+-- 9. Write an SQL query to identify the company that has posted the most job listings. Display the  company name along with the count of job listings they have posted. Handle ties if multiple companies have the same maximum count.
+SELECT TOP 1 C.CompanyName, COUNT(J.JobID) AS JobCount
+FROM Companies C
+LEFT JOIN Jobs J ON C.CompanyID = J.CompanyID
+GROUP BY C.CompanyName
+ORDER BY COUNT(J.JobID) DESC;
