@@ -4,7 +4,7 @@ from Course import Course
 from Payment import Payment
 from Enrollment import Enrollment
 from datetime import datetime
-from Exception import StudentNotFoundException,CourseNotFoundException,TeacherNotFoundException
+from exception import StudentNotFoundException,CourseNotFoundException,TeacherNotFoundException
 class SIS:
     def __init__(self):
         self._enrollments = []
