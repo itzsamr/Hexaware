@@ -1,6 +1,0 @@
-{
-    "python.analysis.extraPaths": [
-        "./Assignment/SIS/util",
-        "./Assignment/SIS/entity"
-    ]
-}
